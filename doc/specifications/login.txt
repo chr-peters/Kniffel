@@ -3,9 +3,10 @@ LOGIN
 
 Anfrage:
 - Ziel: login.php
+- Typ: POST
 - JSON-Objekt:
 { name: 'name',
-  pw: 'hashed_pw' }
+  pw: 'pw' }
 
 Antwort:
 - JSON-Objekt:

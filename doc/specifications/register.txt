@@ -3,10 +3,11 @@ REGISTER
 
 Anfrage:
 - Ziel: register.php
+- Typ: POST
 - JSON-Objekt:
 { email: 'mail',
   name: 'name',
-  pw: 'hashed_pw' }
+  pw: 'pw' }
 
 Antwort:
 - JSON-Objekt:
