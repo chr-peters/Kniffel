@@ -1,0 +1,14 @@
+LOGIN
+=====
+
+Anfrage:
+- Ziel: login.php
+- JSON-Objekt:
+{ name: 'name',
+  pw: 'hashed_pw' }
+
+Antwort:
+- JSON-Objekt:
+{ token: 'token' }
+- Anm.: Der Token ist eine Zahl zwischen 0 und 10, falls
+der Loginvorgang nicht erfolgreich war.
