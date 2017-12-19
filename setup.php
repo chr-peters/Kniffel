@@ -23,7 +23,7 @@ if(!$path_mysql){
     $path_mysql = 'C:\xampp\mysql\bin\mysql';
 }
  
-$file_contents = "\$db_host = '" . $db_host . "';\n"
+$file_contents = "<?php\n\$db_host = '" . $db_host . "';\n"
     . "\$db_user = '" . $db_user . "';\n"
     . "\$db_passwd = '" . $db_passwd . "';\n"
     . "\$db_name = '" . $db_name . "';\n";
