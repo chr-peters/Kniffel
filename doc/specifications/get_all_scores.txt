@@ -1,0 +1,18 @@
+GET ALL SCORES
+==============
+
+Anfrage:
+- Ziel: scores.php
+- Typ: GET
+- JSON-Objekt:
+{ limit: limit,
+  offset: offset }
+- Anm.: Limit gibt die Anzahl der nachgefragten Eintraege an,
+  offset den Versatz. Wird limit=10, Offset=4 angegeben, werden
+  10 Eintraege beginnend ab dem 5. Eintrag zurueckgegeben.
+
+Antwort:
+- JSON-Objekt:
+{ records: [
+  { name: "name", score: score, time_stamp: "time_stamp" }, ...
+  ] }
