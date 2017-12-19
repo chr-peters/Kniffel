@@ -27,6 +27,7 @@
             crossorigin="anonymous"></script>
     
     <script src="scripts/test_requests.js"></script>
+    <script src="scripts/kniffel.js"></script>
     
   </head>
   <body>
@@ -49,8 +50,8 @@
       </form>
     </div>
     <div id="login">
+      <h1>Loggen Sie sich ein!</h1>
       <form>
-        <h1>Loggen Sie sich ein!</h1>
         Nutzername:
         <br>
         <input id="login_name" type="text" placeholder="Nutzername">
@@ -63,9 +64,95 @@
       </form>
     </div>
     <div id="game">
-        <br>
-        <input id="btn_start_game" type="button" value="Spiel starten">
+      <h1>Spielen Sie jetzt!</h1>
+      <input id="btn_start_game" type="button" value="Spiel starten">
+      <br>
+      <input type="image" alt="" id="wuerfel1">
+      <br>
+      <input type="image" alt="" id="wuerfel2">
+      <br>
+      <input type="image" alt="" id="wuerfel3">
+      <br>
+      <input type="image" alt="" id="wuerfel4">
+      <br>
+      <input type="image" alt="" id="wuerfel5">
+      <br>
+      <input type="button" id="btn_wuerfeln" value="Wuerfeln" disabled="true">
+      <br>
+      <table id="block">
+        <tr>
+          <th></th>
+          <th>Player</th>
+        </tr>
+        <tr>
+          <th>1en</th>
+          <td></td>
+        </tr>
+        <tr>
+          <th>2en</th>
+          <td></td>
+        </tr>
+        <tr>
+          <th>3en</th>
+          <td></td>
+        </tr>
+        <tr>
+          <th>4en</th>
+          <td></td>
+        </tr>
+        <tr>
+          <th>5en</th>
+          <td></td>
+        </tr>
+        <tr>
+          <th>6en</th>
+          <td></td>
+        </tr>
+        <tr>
+          <th>Bonus falls >62</th>
+          <td></td>
+        </tr>
+        <tr>
+          <th>Obere Summe</th>
+          <td></td>
+        </tr>
+        <tr>
+          <th>Dreierpasch</th>
+          <td></td>
+        </tr>
+        <tr>
+          <th>Viererpasch</th>
+          <td></td>
+        </tr>
+        <tr>
+          <th>Full House</th>
+          <td></td>
+        </tr>
+        <tr>
+          <th>Kleine Strasse</th>
+          <td></td>
+        </tr>
+        <tr>
+          <th>Grosse Strasse</th>
+          <td></td>
+        </tr>
+        <tr>
+          <th>Kniffel</th>
+          <td></td>
+        </tr>
+        <tr>
+          <th>Chance</th>
+          <td></td>
+        </tr>
+        <tr>
+          <th>Untere Summe</th>
+          <td></td>
+        </tr>
+        <tr>
+          <th>Gesamtsumme</th>
+          <td></td>
+        </tr>
+      </table>
     </div>
   </body>
 </html>
-
