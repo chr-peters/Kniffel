@@ -71,15 +71,33 @@ $(function() {
             async: true,
             success: function(response) {
 		// place the servers response in the designated div
-		$('#score_ranking').html(JSON.stringify(response));
+		$('#score_ranking').html(getTableFromScores(response));
             },
             error: function(xhr, ajaxOptions, thrownError) {
-		// it did not work, just return an error message
-                $('#score_ranking').html('Ein Fehler ist aufgetreten!<br>'+
-					 'Error Code: '+thrownError+'<br>'+
-					 'xhr: '+xhr+'<br>'+
-					 'axajOptions: '+ajaxOptions);
+		// it did not work, so who cares?
+                // $('#score_ranking').html('Ein Fehler ist aufgetreten!<br>'+
+		// 			 'Error Code: '+thrownError+'<br>'+
+		// 			 'xhr: '+xhr+'<br>'+
+		// 			 'axajOptions: '+ajaxOptions);
             }
         });
+    }
+
+    // returns a html table from the scores object
+    function getTableFromScores(scores) {
+	var table = $('<table border="1"></table>');
+	var head = $('<tr></tr>');
+	head.append('<th>Name</th>');
+	head.append('<th>Score</th>');
+	head.append('<th>Time</th>');
+	table.append(head);
+	for (var curEntry in scores.records) {
+	    var row = $('<tr></tr>');
+	    row.append('<td>'+scores.records[curEntry].name+'</td>');
+	    row.append('<td>'+scores.records[curEntry].score+'</td>');
+	    row.append('<td>'+scores.records[curEntry].time_stamp+'</td>');
+	    table.append(row);
+	}
+	return table;
     }
 });
