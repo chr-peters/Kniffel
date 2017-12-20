@@ -51,4 +51,35 @@ $(function() {
             }
         });
     });
+
+    // retrieve the highscores
+    getAllScores(10, 0);
+
+    // returns the servers response to a request of all scores
+    function getAllScores(limit, offset) {
+	// create the json for the request
+	var request = JSON.stringify({limit: limit, offset: offset});
+
+	// perform the ajax call
+	$.ajax({
+            url: 'scores.php',
+            type: 'GET',
+            contentType: 'application/json',
+            charSet: 'utf-8',
+            dataType: 'json',
+            data: request,
+            async: true,
+            success: function(response) {
+		// place the servers response in the designated div
+		$('#score_ranking').html(JSON.stringify(response));
+            },
+            error: function(xhr, ajaxOptions, thrownError) {
+		// it did not work, just return an error message
+                $('#score_ranking').html('Ein Fehler ist aufgetreten!<br>'+
+					 'Error Code: '+thrownError+'<br>'+
+					 'xhr: '+xhr+'<br>'+
+					 'axajOptions: '+ajaxOptions);
+            }
+        });
+    }
 });
