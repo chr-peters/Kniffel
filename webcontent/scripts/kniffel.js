@@ -1,16 +1,6 @@
 $(function() {
-    var bonus = $('#block tr').filter(function(index) {
-        return index==7;
-    });
-    var oben = $('#block tr').filter(function(index) {
-        return index==8;
-    });
-    var unten = $('#block tr').filter(function(index) {
-        return index==16;
-    });
-    var gesamt = $('#block tr').filter(function(index) {
-        return index==17;
-    });
+    var tabelle;
+    var belegt;
 
     //count the number of dice rolls
     var getCount = (function() {
@@ -40,6 +30,7 @@ $(function() {
         }
     }
 
+    //get dice values
     function getValues() {
         var values = [0, 0, 0, 0, 0, 0];
         for(var i=1; i<=5; i++) {
@@ -50,12 +41,11 @@ $(function() {
 
     //set up game
     $('#btn_start_game').click(function() {
+        tabelle = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+        belegt = [false, false, false, false, false, false, false, true, false, false, false, false, false, false, false, true, true];
         $('#block td').each(function() {
             $(this).html("");
         });
-        oben.find('td').html(0);
-        unten.find('td').html(0);
-        gesamt.find('td').html(0);
         reset();
     });
 
@@ -82,7 +72,7 @@ $(function() {
     $('#btn_wuerfeln').click(function() {
         var count = getCount();
         for(var i=1; i<=5; i++) {
-            //if not marked reroll dice
+            //if not marked -> reroll dice
             if(!$('#wuerfel'+i).prop('readonly')) {
                 $('#wuerfel'+i).prop('alt', getRandom());
             } else {
@@ -99,85 +89,81 @@ $(function() {
         var eingetragen = false;
         switch($(this).index()) {
             //1en
-            case 1: if($(this).find('td').html()!="") {
+            case 1: if(belegt[0]) {
                         break;
                     }
-                    $(this).find('td').html(getValues()[0]*1);
-                    oben.find('td').html(parseInt(oben.find('td').html())+parseInt($(this).find('td').html()));
+                    tabelle[0] = 1*getValues()[0];
+                    belegt[0] = true;
                     eingetragen = true;
                     break;
             //2en
-            case 2: if($(this).find('td').html()!="") {
+            case 2: if(belegt[1]) {
                         break;
                     }
-                    $(this).find('td').html(getValues()[1]*2);
-                    oben.find('td').html(parseInt(oben.find('td').html())+parseInt($(this).find('td').html()));
+                    tabelle[1] = 2*getValues()[1];
+                    belegt[1] = true;
                     eingetragen = true;
                     break;
             //3en
-            case 3: if($(this).find('td').html()!="") {
+            case 3: if(belegt[2]) {
                         break;
                     }
-                    $(this).find('td').html(getValues()[2]*3);
-                    oben.find('td').html(parseInt(oben.find('td').html())+parseInt($(this).find('td').html()));
+                    tabelle[2] = 3*getValues()[2];
+                    belegt[2] = true;
                     eingetragen = true;
                     break;
             //4en
-            case 4: if($(this).find('td').html()!="") {
+            case 4: if(belegt[3]) {
                         break;
                     }
-                    $(this).find('td').html(getValues()[3]*4);
-                    oben.find('td').html(parseInt(oben.find('td').html())+parseInt($(this).find('td').html()));
+                    tabelle[3] = 4*getValues()[3];
+                    belegt[3] = true;
                     eingetragen = true;
                     break;
             //5en
-            case 5: if($(this).find('td').html()!="") {
+            case 5: if(belegt[4]) {
                         break;
                     }
-                    $(this).find('td').html(getValues()[4]*5);
-                    oben.find('td').html(parseInt(oben.find('td').html())+parseInt($(this).find('td').html()));
+                    tabelle[4] = 5*getValues()[4];
+                    belegt[4] = true;
                     eingetragen = true;
                     break;
             //6en
-            case 6: if($(this).find('td').html()!="") {
+            case 6: if(belegt[5]) {
                         break;
                     }
-                    $(this).find('td').html(getValues()[5]*6);
-                    oben.find('td').html(parseInt(oben.find('td').html())+parseInt($(this).find('td').html()));
+                    tabelle[5] = 6*getValues()[5];
+                    belegt[5] = true;
                     eingetragen = true;
                     break;
             //Dreierpasch
-            case 9: if($(this).find('td').html()!="") {
+            case 9: if(belegt[8]) {
                         break;
                     }
                     if(getValues().some(function(value) {
                         return value>=3;
                     })) {
                         var values = getValues();
-                        $(this).find('td').html(1*values[0]+2*values[1]+3*values[2]+4*values[3]+5*values[4]+6*values[5]);
-                    } else {
-                        $(this).find('td').html(0);
+                        tabelle[8] = 1*values[0]+2*values[1]+3*values[2]+4*values[3]+5*values[4]+6*values[5];
                     }
-                    unten.find('td').html(parseInt(unten.find('td').html())+parseInt($(this).find('td').html()));
+                    belegt[8] = true;
                     eingetragen = true;
                     break;
             //Viererpasch
-            case 10: if($(this).find('td').html()!="") {
+            case 10: if(belegt[9]) {
                          break;
                      }
                      if(getValues().some(function(value) {
                          return value>=4;
                      })) {
                          var values = getValues();
-                         $(this).find('td').html(1*values[0]+2*values[1]+3*values[2]+4*values[3]+5*values[4]+6*values[5]);
-                     } else {
-                         $(this).find('td').html(0);
+                         tabelle[9] = 1*values[0]+2*values[1]+3*values[2]+4*values[3]+5*values[4]+6*values[5];
                      }
-                     unten.find('td').html(parseInt(unten.find('td').html())+parseInt($(this).find('td').html()));
+                     belegt[9] = true;
                      eingetragen = true;
                      break;
             //Full House
-            case 11: if($(this).find('td').html()!="") {
+            case 11: if(belegt[10]) {
                          break;
                      }
                      if(getValues().some(function(value) {
@@ -185,86 +171,89 @@ $(function() {
                      }) && getValues().some(function(value) {
                          return value==3;
                      })) {
-                         $(this).find('td').html(25);
-                     } else {
-                         $(this).find('td').html(0);
+                         tabelle[10] = 25;
                      }
-                     unten.find('td').html(parseInt(unten.find('td').html())+parseInt($(this).find('td').html()));
+                     belegt[10] = true;
                      eingetragen = true;
                      break;
             //Kleine Strasse
-            case 12: if($(this).find('td').html()!="") {
+            case 12: if(belegt[11]) {
                          break;
                      }
                      var values = getValues();
                      if((values[0]>=1 && values[1]>=1 && values[2]>=1 && values[3]>=1) || (values[1]>=1 && values[2]>=1 &&
                         values[3]>=1 && values[4]>=1) || (values[2]>=1 && values[3]>=1 && values[4]>=1 && values[5]>=1)) {
-                         $(this).find('td').html(30);
-                     } else {
-                         $(this).find('td').html(0);
+                         tabelle[11] = 30;
                      }
-                     unten.find('td').html(parseInt(unten.find('td').html())+parseInt($(this).find('td').html()));
+                     belegt[11] = true;
                      eingetragen = true;
                      break;
             //Grosse Strasse
-            case 13: if($(this).find('td').html()!="") {
+            case 13: if(belegt[12]) {
                          break;
                      }
                      if(!getValues().some(function(value) {
                          return value>1;
                      })) {
-                         $(this).find('td').html(40);
-                     } else {
-                         $(this).find('td').html(0);
+                         tabelle[12] = 40;
                      }
-                     unten.find('td').html(parseInt(unten.find('td').html())+parseInt($(this).find('td').html()));
+                     belegt[12] = true;
                      eingetragen = true;
                      break;
             //Kniffel
-            case 14: if(parseInt($(this).find('td').html())==0) {
+            case 14: if(belegt[13] && tabelle[13]==0) {
                          break;
                      }
-                     var alt = 0;
                      if(getValues().some(function(value) {
                          return value==5;
                      })) {
-                         if($(this).find('td').html()=="") {
-                             $(this).find('td').html(50);
-                         } else {
-                             alt = parseInt($(this).find('td').html());
-                             $(this).find('td').html(parseInt($(this).find('td').html())+50);
-                         }
+                         tabelle[13] += 50;
                      } else {
-                         if($(this).find('td').html()=="") {
-                             $(this).find('td').html(0);
-                         } else {
+                         if(belegt[13]) {
                              break;
                          }
                      }
-                     unten.find('td').html(parseInt(unten.find('td').html())+parseInt($(this).find('td').html())-alt);
+                     belegt[13] = true;
                      eingetragen = true;
                      break;
             //Chance
-            case 15: if($(this).find('td').html()!="") {
+            case 15: if(belegt[14]) {
                          break;
                      }
                      var values = getValues();
-                     $(this).find('td').html(1*values[0]+2*values[1]+3*values[2]+4*values[3]+5*values[4]+6*values[5]);
-                     unten.find('td').html(parseInt(unten.find('td').html())+parseInt($(this).find('td').html()));
+                     tabelle[14] = 1*values[0]+2*values[1]+3*values[2]+4*values[3]+5*values[4]+6*values[5];
+                     belegt[14] = true;
                      eingetragen = true;
                      break;
         }
-        if(bonus.find('td').html()=="" && oben.find('td').html()>62) {
-            bonus.find('td').html(35);
-            oben.find('td').html(parseInt(oben.find('td').html())+35);
-        }
-        gesamt.find('td').html(parseInt(oben.find('td').html())+parseInt(unten.find('td').html()));
-        var ende = false;
-        $('#block tr').each(function() {
-            if(eingetragen && !ende && $(this).find('td').html()=="" && $(this).html()!=bonus.html()) {
-                reset();
-                ende = true;
+        //check if anything changed
+        if(eingetragen) {
+            //calculate upper sum
+            tabelle[7] = tabelle[0]+tabelle[1]+tabelle[2]+tabelle[3]+tabelle[4]+tabelle[5]+tabelle[6];
+            //check for bonus
+            if(!belegt[6] && tabelle[7]>62) {
+                tabelle[6] = 35;
+                belegt[6] = true;
+                tabelle[7] += tabelle[6];
             }
-        });
+            //calculate lower sum
+            tabelle[15] = tabelle[8]+tabelle[9]+tabelle[10]+tabelle[11]+tabelle[12]+tabelle[13]+tabelle[14];
+            //calculate total sum
+            tabelle[16] = tabelle[7]+tabelle[15];
+            //write values into table and check for end of game
+            var ende = true;
+            for(var i=0; i<tabelle.length; i++) {
+                if(belegt[i]) {
+                    $($('#block td').get(i)).html(tabelle[i]);
+                } else if(i!=6) {
+                    ende = false;
+                }
+            }
+            if(!ende) {
+                reset();
+            } else {
+                $('#btn_wuerfeln').prop('disabled', true);
+            }
+        }
     });
 });
