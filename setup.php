@@ -8,7 +8,7 @@ $db_passwd = getenv('DB_PASSWD');
 $path_mysql = getenv('MYSQL_PATH');
  
 if(!$db_host){
-    $db_host = 'http://auravendill.de';
+    $db_host = 'www.auravendill.de';
 }
 if(!$db_name){
     $db_name = 'kniffel';
