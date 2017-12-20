@@ -1,0 +1,13 @@
+GET SINGLE SCORE
+==============
+
+Anfrage:
+- Ziel: scores.php
+- Typ: GET
+- JSON-Objekt:
+{ name: "name" }
+
+Antwort:
+- JSON-Objekt:
+{ name: "name", score: score, time_stamp: "time_stamp" }
+- Anm.: Wenn der Benutzer nicht gefunden wurde, wird null zurueckgeliefert

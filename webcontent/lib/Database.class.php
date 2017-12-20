@@ -62,6 +62,36 @@ class Database {
 
         return $results;
     }
+
+    /**
+     * Returns a single record in the format that was specified in getScores.
+     *
+     * @param name The name of the user.
+     *
+     * @return The record in the already specified format or NULL if the user was not found.
+     */
+    public function getScoreRecord($name) {
+        // create the statement
+        $statement = $this->pdo->prepare("select * from highscores where name = :name");
+
+        $statement->bindParam(':name', $name);
+
+        $statement->execute();
+
+        // test if the user was found
+        if ($statement->rowCount() == 1) {
+            // create the result and return it
+            $row = $statement->fetch();
+            $res = array();
+            
+            $res['name'] = $row['name'];
+            $res['score'] = (int)$row['score'];
+            $res['time_stamp'] = $row['time_stamp'];
+
+            return $res;
+        }
+        return NULL;
+    }
 }
 
 // test the connection

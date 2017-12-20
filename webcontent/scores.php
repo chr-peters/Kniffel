@@ -39,3 +39,22 @@ if (isset($requestContent['limit']) && isset($requestContent['offset'])) {
     echo $output;
     exit;
 }
+// test if the name of a user is given, in this case return the corresponding record
+if (isset($requestContent['name'])) {
+
+    // create db connection
+    $db = Database::getInstance();
+
+    // filter the value of name to prevent SQL injections
+    $name = filter_var($requestContent['name'], FILTER_SANITIZE_SPECIAL_CHARS);
+
+    // now get the result
+    $result = $db->getScoreRecord($name);
+
+    // create a json object from the result
+    $output = json_encode($result);
+
+    // send the output and terminate the script
+    echo $output;
+    exit;
+}
