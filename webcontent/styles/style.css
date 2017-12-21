@@ -28,9 +28,13 @@ header {
     position: absolute;
     bottom: 0px;
     margin: 3%;
-    color: white;
     text-shadow: 0px 0px 15px rgb(209, 0, 0);
     font-size: 7em;
+}
+
+#logo a {
+    text-decoration: none;
+    color: white;
 }
 
 #nav {
