@@ -1,4 +1,5 @@
 $(function() {
+    var wuerfel;
     var tabelle;
     var belegt;
 
@@ -24,23 +25,26 @@ $(function() {
     function reset() {
         $('#btn_wuerfeln').prop('disabled', false);
         getCount(true);
-        for(var i=1; i<=5; i++) {
-            $('#wuerfel'+i).prop('readonly', false);
-            $('#wuerfel'+i).prop('alt', getRandom());
+        for(var i=0; i<5; i++) {
+            wuerfel[i] = getRandom();
+            $('#wuerfel'+i).removeClass('chosen');
+            $('#wuerfel'+i).prop('src', '../img/wuerfel_'+wuerfel[i]);
+            $('#wuerfel'+i).prop('alt', wuerfel[i]);
         }
     }
 
     //get dice values
     function getValues() {
         var values = [0, 0, 0, 0, 0, 0];
-        for(var i=1; i<=5; i++) {
-            values[$('#wuerfel'+i).prop('alt')-1]++;
+        for(var i=0; i<5; i++) {
+            values[wuerfel[i]-1]++;
         }
         return values;
     }
 
     //set up game
     $('#btn_start_game').click(function() {
+        wuerfel = [0, 0, 0, 0, 0];
         tabelle = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
         belegt = [false, false, false, false, false, false, false, true, false, false, false, false, false, false, false, true, true];
         $('#block td').each(function() {
@@ -49,34 +53,62 @@ $(function() {
         reset();
     });
 
+    $('#wuerfel0').click(function() {
+        $(this).toggleClass('chosen');
+        if($(this).hasClass('chosen')) {
+            $(this).prop('src', '../img/wuerfel_'+wuerfel[i]+'_disabled');
+        } else {
+            $(this).prop('src', '../img/wuerfel_'+wuerfel[i]);
+        }
+    });
+
     $('#wuerfel1').click(function() {
-        $(this).prop('readonly', !$(this).prop('readonly'));
+        $(this).toggleClass('chosen');
+        if($(this).hasClass('chosen')) {
+            $(this).prop('src', '../img/wuerfel_'+wuerfel[i]+'_disabled');
+        } else {
+            $(this).prop('src', '../img/wuerfel_'+wuerfel[i]);
+        }
     });
 
     $('#wuerfel2').click(function() {
-        $(this).prop('readonly', !$(this).prop('readonly'));
+        $(this).toggleClass('chosen');
+        if($(this).hasClass('chosen')) {
+            $(this).prop('src', '../img/wuerfel_'+wuerfel[i]+'_disabled');
+        } else {
+            $(this).prop('src', '../img/wuerfel_'+wuerfel[i]);
+        }
     });
 
     $('#wuerfel3').click(function() {
-        $(this).prop('readonly', !$(this).prop('readonly'));
+        $(this).toggleClass('chosen');
+        if($(this).hasClass('chosen')) {
+            $(this).prop('src', '../img/wuerfel_'+wuerfel[i]+'_disabled');
+        } else {
+            $(this).prop('src', '../img/wuerfel_'+wuerfel[i]);
+        }
     });
 
     $('#wuerfel4').click(function() {
-        $(this).prop('readonly', !$(this).prop('readonly'));
-    });
-
-    $('#wuerfel5').click(function() {
-        $(this).prop('readonly', !$(this).prop('readonly'));
+        $(this).toggleClass('chosen');
+        if($(this).hasClass('chosen')) {
+            $(this).prop('src', '../img/wuerfel_'+wuerfel[i]+'_disabled');
+        } else {
+            $(this).prop('src', '../img/wuerfel_'+wuerfel[i]);
+        }
     });
 
     $('#btn_wuerfeln').click(function() {
         var count = getCount();
-        for(var i=1; i<=5; i++) {
+        for(var i=0; i<5; i++) {
             //if not marked -> reroll dice
-            if(!$('#wuerfel'+i).prop('readonly')) {
-                $('#wuerfel'+i).prop('alt', getRandom());
+            if(!$('#wuerfel'+i).hasClass('chosen')) {
+                wuerfel[i] = getRandom();
+                $('#wuerfel'+i).prop('src', '../img/wuerfel_'+wuerfel[i]);
+                $('#wuerfel'+i).prop('alt', wuerfel[i]);
             } else {
-                $('#wuerfel'+i).prop('readonly', false);
+                $('#wuerfel'+i).removeClass('chosen');
+                $('#wuerfel'+i).prop('src', '../img/wuerfel_'+wuerfel[i]);
             }
         }
         //disable button after three rolls
@@ -87,6 +119,10 @@ $(function() {
 
     $('#block tr').click(function() {
         var eingetragen = false;
+        $('#block tr').each(function() {
+            $(this).removeClass('selected');
+        });
+        $(this).addClass('selected');
         switch($(this).index()) {
             //1en
             case 1: if(belegt[0]) {
