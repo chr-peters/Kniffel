@@ -1,6 +1,6 @@
 <?php
 
-require(__DIR__.'/Database.class.php');
+require_once(__DIR__.'/Database.class.php');
 
 /**
  * Creates a token for a given $user object.
