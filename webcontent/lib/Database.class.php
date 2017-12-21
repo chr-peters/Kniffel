@@ -124,6 +124,30 @@ class Database {
 
         return $statement->execute();
     }
+
+    /**
+     * Returns an associative array that represents the user given by the name $username
+     *
+     * @return The object or FALSE if the statement could not be executed.
+     */
+    public function getUserInfo($username) {
+        $statement = $this->pdo->prepare("select * from users where name = :name");
+
+        $statement->bindParam(':name', $username);
+
+        if (!$statement->execute() || $statement->rowCount() == 0) {
+            // either it did not work or the entry could not be found
+            return false;
+        }
+
+        // create the object
+        $row = $statement->fetch();
+        $user = array();
+        $user['name'] = $row['name'];
+        $user['email'] = $row['email'];
+        $user['pw'] = $row['pw'];
+        return $user;
+    }
 }
 
 // test the connection
