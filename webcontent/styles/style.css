@@ -1,9 +1,4 @@
-html {
-    height: 100%;
-}
-
 body {
-    height: 100%;
     background-color: rgb(40, 40, 40);
     /**background-image: url('../img/bg.jpg');*/
     background-size: cover;
@@ -11,36 +6,39 @@ body {
 }
 
 #main {
-    position: relative;
     background-color: rgb(58, 58, 58);
-    height: 85%;
     width: 66%;
     margin: auto;
+    margin-bottom: 100px;
     border-radius: 0px 0px 20px 20px;
     box-shadow: 0px 0px 40px black;
 }
 
 header {
     position: relative;
-    text-align: left;
-    height: 30%;
-    color: white;
-    padding-left: 5%;
-    text-shadow: 0px 0px 10px rgb(209, 0, 0);
-    font-size: 6em;
+    height: 30vh;
     background-image: url('../img/red_dice.jpg');
     background-size: auto 100%;
     background-repeat: no-repeat;
     background-position: right;
     background-color: black;
-    border-bottom: 5px solid black;
+}
+
+#logo {
+    position: absolute;
+    bottom: 0px;
+    margin: 3%;
+    color: white;
+    text-shadow: 0px 0px 15px rgb(209, 0, 0);
+    font-size: 7em;
 }
 
 #nav {
     text-align: left;
     margin: 0;
     padding: 0;
-    background-color: grey;
+    background-color: rgb(58, 58, 58);
+    background: linear-gradient(to bottom, rgb(58, 58, 58) 0%, rgb(80, 80, 80) 50%, rgb(58, 58, 58) 100%);
 }
 
 #nav ul {
@@ -58,7 +56,6 @@ header {
 
 #nav li a {
     margin: 0;
-    background-color: grey;
     padding-right: 10px;
     padding-left: 10px;
     color: white;
@@ -73,6 +70,7 @@ header {
 
 #content {
     text-align: left;
-    padding: 10px;
+    padding: 15px;
     background-color: white;
+    border-radius: 0px 0px 20px 20px;
 }
