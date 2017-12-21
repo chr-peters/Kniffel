@@ -1,3 +1,9 @@
+.bilder {
+    width: 75px;
+    height: auto;
+    border-radius: 5px;
+}
+
 .selected {
     background-color: rgb(0, 0, 255);
 }
