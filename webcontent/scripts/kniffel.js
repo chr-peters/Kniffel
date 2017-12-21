@@ -28,7 +28,7 @@ $(function() {
         for(var i=0; i<5; i++) {
             wuerfel[i] = getRandom();
             $('#wuerfel'+i).removeClass('chosen');
-            $('#wuerfel'+i).prop('src', '../img/wuerfel_'+wuerfel[i]);
+            $('#wuerfel'+i).prop('src', '../img/wuerfel_'+wuerfel[i]+'.png');
             $('#wuerfel'+i).prop('alt', wuerfel[i]);
         }
     }
@@ -56,45 +56,45 @@ $(function() {
     $('#wuerfel0').click(function() {
         $(this).toggleClass('chosen');
         if($(this).hasClass('chosen')) {
-            $(this).prop('src', '../img/wuerfel_'+wuerfel[i]+'_disabled');
+            $(this).prop('src', '../img/wuerfel_'+wuerfel[i]+'_disabled.png');
         } else {
-            $(this).prop('src', '../img/wuerfel_'+wuerfel[i]);
+            $(this).prop('src', '../img/wuerfel_'+wuerfel[i]+'.png');
         }
     });
 
     $('#wuerfel1').click(function() {
         $(this).toggleClass('chosen');
         if($(this).hasClass('chosen')) {
-            $(this).prop('src', '../img/wuerfel_'+wuerfel[i]+'_disabled');
+            $(this).prop('src', '../img/wuerfel_'+wuerfel[i]+'_disabled.png');
         } else {
-            $(this).prop('src', '../img/wuerfel_'+wuerfel[i]);
+            $(this).prop('src', '../img/wuerfel_'+wuerfel[i]+'.png');
         }
     });
 
     $('#wuerfel2').click(function() {
         $(this).toggleClass('chosen');
         if($(this).hasClass('chosen')) {
-            $(this).prop('src', '../img/wuerfel_'+wuerfel[i]+'_disabled');
+            $(this).prop('src', '../img/wuerfel_'+wuerfel[i]+'_disabled.png');
         } else {
-            $(this).prop('src', '../img/wuerfel_'+wuerfel[i]);
+            $(this).prop('src', '../img/wuerfel_'+wuerfel[i]+'.png');
         }
     });
 
     $('#wuerfel3').click(function() {
         $(this).toggleClass('chosen');
         if($(this).hasClass('chosen')) {
-            $(this).prop('src', '../img/wuerfel_'+wuerfel[i]+'_disabled');
+            $(this).prop('src', '../img/wuerfel_'+wuerfel[i]+'_disabled.png');
         } else {
-            $(this).prop('src', '../img/wuerfel_'+wuerfel[i]);
+            $(this).prop('src', '../img/wuerfel_'+wuerfel[i]+'.png');
         }
     });
 
     $('#wuerfel4').click(function() {
         $(this).toggleClass('chosen');
         if($(this).hasClass('chosen')) {
-            $(this).prop('src', '../img/wuerfel_'+wuerfel[i]+'_disabled');
+            $(this).prop('src', '../img/wuerfel_'+wuerfel[i]+'_disabled.png');
         } else {
-            $(this).prop('src', '../img/wuerfel_'+wuerfel[i]);
+            $(this).prop('src', '../img/wuerfel_'+wuerfel[i]+'.png');
         }
     });
 
@@ -104,11 +104,11 @@ $(function() {
             //if not marked -> reroll dice
             if(!$('#wuerfel'+i).hasClass('chosen')) {
                 wuerfel[i] = getRandom();
-                $('#wuerfel'+i).prop('src', '../img/wuerfel_'+wuerfel[i]);
+                $('#wuerfel'+i).prop('src', '../img/wuerfel_'+wuerfel[i]+'.png');
                 $('#wuerfel'+i).prop('alt', wuerfel[i]);
             } else {
                 $('#wuerfel'+i).removeClass('chosen');
-                $('#wuerfel'+i).prop('src', '../img/wuerfel_'+wuerfel[i]);
+                $('#wuerfel'+i).prop('src', '../img/wuerfel_'+wuerfel[i]+'.png');
             }
         }
         //disable button after three rolls
