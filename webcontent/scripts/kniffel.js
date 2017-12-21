@@ -56,45 +56,45 @@ $(function() {
     $('#wuerfel0').click(function() {
         $(this).toggleClass('chosen');
         if($(this).hasClass('chosen')) {
-            $(this).prop('src', 'img/wuerfel_'+wuerfel[i]+'_disabled.png');
+            $(this).prop('src', 'img/wuerfel_'+wuerfel[0]+'_disabled.png');
         } else {
-            $(this).prop('src', 'img/wuerfel_'+wuerfel[i]+'.png');
+            $(this).prop('src', 'img/wuerfel_'+wuerfel[0]+'.png');
         }
     });
 
     $('#wuerfel1').click(function() {
         $(this).toggleClass('chosen');
         if($(this).hasClass('chosen')) {
-            $(this).prop('src', 'img/wuerfel_'+wuerfel[i]+'_disabled.png');
+            $(this).prop('src', 'img/wuerfel_'+wuerfel[1]+'_disabled.png');
         } else {
-            $(this).prop('src', 'img/wuerfel_'+wuerfel[i]+'.png');
+            $(this).prop('src', 'img/wuerfel_'+wuerfel[1]+'.png');
         }
     });
 
     $('#wuerfel2').click(function() {
         $(this).toggleClass('chosen');
         if($(this).hasClass('chosen')) {
-            $(this).prop('src', 'img/wuerfel_'+wuerfel[i]+'_disabled.png');
+            $(this).prop('src', 'img/wuerfel_'+wuerfel[2]+'_disabled.png');
         } else {
-            $(this).prop('src', 'img/wuerfel_'+wuerfel[i]+'.png');
+            $(this).prop('src', 'img/wuerfel_'+wuerfel[2]+'.png');
         }
     });
 
     $('#wuerfel3').click(function() {
         $(this).toggleClass('chosen');
         if($(this).hasClass('chosen')) {
-            $(this).prop('src', 'img/wuerfel_'+wuerfel[i]+'_disabled.png');
+            $(this).prop('src', 'img/wuerfel_'+wuerfel[3]+'_disabled.png');
         } else {
-            $(this).prop('src', 'img/wuerfel_'+wuerfel[i]+'.png');
+            $(this).prop('src', 'img/wuerfel_'+wuerfel[3]+'.png');
         }
     });
 
     $('#wuerfel4').click(function() {
         $(this).toggleClass('chosen');
         if($(this).hasClass('chosen')) {
-            $(this).prop('src', 'img/wuerfel_'+wuerfel[i]+'_disabled.png');
+            $(this).prop('src', 'img/wuerfel_'+wuerfel[4]+'_disabled.png');
         } else {
-            $(this).prop('src', 'img/wuerfel_'+wuerfel[i]+'.png');
+            $(this).prop('src', 'img/wuerfel_'+wuerfel[4]+'.png');
         }
     });
 
