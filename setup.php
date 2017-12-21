@@ -31,3 +31,5 @@ $file_contents = "<?php\n\$db_host = '" . $db_host . "';\n"
 // write database config to file
 file_put_contents($config_file, $file_contents);
 echo error_get_last();
+
+echo "Skript wurde ausgeführt.";
