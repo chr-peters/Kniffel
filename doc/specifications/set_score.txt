@@ -1,0 +1,18 @@
+SET SINGLE SCORE
+==============
+
+Anfrage:
+- Ziel: scores.php
+- Typ: POST
+- JSON-Objekt:
+{ token: "token",
+  score: score}
+
+Antwort:
+- JSON-Objekt:
+{ status: integer }
+- Anm.: status gibt an, ob die Aktion geklappt hat. Folgende
+        Werte koennen hierbei auftreten:
+
+	0: alles ok
+	1: OB DU BEHINDERT BIST???

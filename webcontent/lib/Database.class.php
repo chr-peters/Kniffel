@@ -148,6 +148,35 @@ class Database {
         $user['pw'] = $row['pw'];
         return $user;
     }
+
+    /**
+     * Returns the username corresponding to a token or false
+     * if an error occured.
+     */
+    public function getNameByToken($token) {
+        $statement = $this->pdo->prepare("select name from tokens where token = :token");
+
+        $statement->bindParam(':token', $token);
+
+        if($statement->execute() || $statement->rowCount() == 0) {
+            return false;
+        }
+
+        $row = $statement->fetch();
+        return $row['name'];
+    }
+    
+    /**
+     * Sets the score of a user.
+     */
+    public function setScore($username, $score) {
+        $statement = $this->pdo->prepare("insert into highscores(name, score) values(:name, :score) on duplicate key update score = :score, time_stamp = current_timestamp");
+
+        $statement->bindParam(':name', $username);
+        $statement->bindParam(':score', $score);
+
+        return $statement->execute();
+    }
 }
 
 // test the connection
