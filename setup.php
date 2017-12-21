@@ -8,13 +8,13 @@ $db_passwd = getenv('DB_PASSWD');
 $path_mysql = getenv('MYSQL_PATH');
  
 if(!$db_host){
-    $db_host = 'www.auravendill.de';
+    $db_host = 'auravendill.de';
 }
 if(!$db_name){
     $db_name = 'kniffel';
 }
 if(!$db_user){
-    $db_user = 'phpmyadmin';
+    $db_user = 'Kniffelmaster';
 }
 if(!$db_passwd){
     $db_passwd = 'TODO: ENTER PW';
