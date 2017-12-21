@@ -96,7 +96,6 @@ $(function() {
             charSet: 'utf-8',
             dataType: 'json',
             data: request,
-            async: true,
             success: function(response) {
 		// place the servers response in the designated div
 		$('#score_ranking').html(getTableFromScores(response));

@@ -92,14 +92,50 @@ class Database {
         }
         return NULL;
     }
+
+    /**
+     * Adds a user to the database.
+     *
+     * The user object is described by an associative array:
+     *
+     * $user['name'] = name
+     * $user['email'] = email
+     * $user['pw'] = password
+     */
+    public function addUser($user) {
+        // create the statement
+        $statement = $this->pdo->prepare("insert into users values(:name, :email, :pw)");
+
+        $statement->bindParam(':name', $user['name']);
+        $statement->bindParam(':email', $user['email']);
+        $statement->bindParam(':pw', $user['pw']);
+
+        return $statement->execute();
+    }
+    
+    /**
+     * Inserts a token into the database for a given username.
+     */
+    public function setToken($username, $token) {
+        $statement = $this->pdo->prepare("insert into tokens values(:name, :token) on duplicate key update token = :token");
+
+        $statement->bindParam(':name', $username);
+        $statement->bindParam(':token', $token);
+
+        return $statement->execute();
+    }
 }
 
 // test the connection
 /* try { */
 /*     $db = Database::getInstance(); */
 
-/*     $scores = $db->getScores(10, 0); */
-/*     print_r($scores); */
-/* } catch (PDOException $e) { */
+/*     $user = array(); */
+/*     $user['name'] = 'Yoloswagger'; */
+/*     $user['email'] = 'wasgehtab@test'; */
+/*     $user['pw'] = password_hash('1234', PASSWORD_DEFAULT); */
+
+/*     $db->addUser($user); */
+/*  } catch (PDOException $e) { */
 /*     echo 'Connection failed: '.$e->getMessage(); */
 /* } */
