@@ -1,12 +1,9 @@
 $(function(){
-    // refresh the page
-    refresh();
-    
     // first load the content of the starting page
     loadContent('contents/starting_page.html');
 
-    // now build up the navigation functionality
-    refreshNav();
+    // now refresh the page
+    refresh();
 });
 
 /**
