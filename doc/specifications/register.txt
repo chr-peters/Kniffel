@@ -11,6 +11,8 @@ Anfrage:
 
 Antwort:
 - JSON-Objekt:
-{ token: 'token' }
-- Anm.: Der Token ist eine Zahl zwischen 0 und 10, falls
-der Registrierungsvorgang nicht erfolgreich war.
+{ status: integer, token: 'token' }
+- Anm.: Der Status kann folgende Werte annehmen:
+
+  	0: alles klar
+	1: bist du dumm???

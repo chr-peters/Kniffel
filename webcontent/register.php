@@ -10,9 +10,10 @@ require('lib/requests.php');
 require('lib/tokens.php');
 
 
-// check if it is a POST request (see specifications for scores)
+// check if it is a POST request (see specifications for register)
 if (!strcasecmp($_SERVER['REQUEST_METHOD'], 'POST') == 0) {
     // not a POST request, nothing to do
+    sendResponse(1, null);
     exit;
 }
 
@@ -39,6 +40,7 @@ if (isset($requestContent['email']) && isset($requestContent['name']) && isset($
     // add the user to the database
     if (!$db->addUser($user)) {
         // adding the user did not work, so terminate the script
+        sendResponse(1, null);
         exit;
     }
 
@@ -48,9 +50,20 @@ if (isset($requestContent['email']) && isset($requestContent['name']) && isset($
     // update the token
     if ($db->setToken($user['name'], $token)) {
         // create the JSON response and terminate the script
-        $response = array();
-        $response['token'] = $token;
-        echo json_encode($response);
+        sendResponse(0, $token);
+        exit;
     }
+    sendResponse(1, null);
     exit;
+}
+
+// if this area is reached, registering did not work
+sendResponse(1, null);
+
+// sends a response to the user
+function sendResponse($status, $token) {
+    $response = array();
+    $response['token'] = $token;
+    $response['status'] = $status;
+    echo json_encode($response);
 }
