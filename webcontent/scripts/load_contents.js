@@ -11,31 +11,31 @@ $(function(){
 */
 function refreshNav() {
     // now add the handlers for each navigation element
-    $('#nav_startpage').click(function() {
+    $('#nav_startpage').unbind().click(function() {
 	loadContent('contents/starting_page.html');
     });
 
-    $('#nav_newgame a').click(function() {
+    $('#nav_newgame a').unbind().click(function() {
 	loadContent('contents/start_game.html');
     });
 
-    $('#nav_highscores a').click(function() {
+    $('#nav_highscores a').unbind().click(function() {
 	loadContent('contents/highscores.html');
     });
 
-    $('#nav_login a').click(function() {
+    $('#nav_login a').unbind().click(function() {
 	loadContent('contents/login.html');
     });
 
-    $('#nav_register a').click(function() {
+    $('#nav_register a').unbind().click(function() {
 	loadContent('contents/register.html');
     });
 
-    $('#nav_profile a').click(function() {
+    $('#nav_profile a').unbind().click(function() {
 	loadContent('contents/profile.html');
     });
 
-    $('#nav_logout a').click(function() {
+    $('#nav_logout a').unbind().click(function() {
 	removeCookies();
 	refresh();
     });
