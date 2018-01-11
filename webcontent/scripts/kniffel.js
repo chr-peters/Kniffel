@@ -289,9 +289,8 @@ $(function() {
                 reset();
             } else {
                 $('#btn_wuerfeln').prop('disabled', true);
-		var cookie = Cookies.get();
 		if(isLoggedIn()) {
-		    var data = JSON.stringify({token: cookie.get('token'), score: tabelle[16]});
+		    var data = JSON.stringify({token: Cookies.get('token'), score: tabelle[16]});
 		    $.ajax({
 			url: 'scores.php',
 			type: 'POST',
@@ -300,14 +299,14 @@ $(function() {
 			dataType: 'json',
 			data: data,
 			success: function(response) {
-			    if(!response.status===0) {
+			    if(response.status!==0) {
 				var error_msg = "Es konnte keine Verbindung zum Server hergestellt werden.";
 				$('#error_msg').empty().append(error_msg);
 			    }
 			},
 			error: function(xhr, ajaxOptions, thrownError) {
 			    // set the error message
-			    var error_msg = "Die Registrierung ist leider zur Zeit nicht möglich.";
+			    var error_msg = "Es konnte keine Verbindung zum Server hergestellt werden.";
 			    $('#error_msg').empty().append(error_msg);
 			}
 		    });
