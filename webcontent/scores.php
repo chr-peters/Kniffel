@@ -7,6 +7,7 @@ error_reporting(E_ALL);
 // include the necessary files
 require('lib/Database.class.php');
 require('lib/requests.php');
+require('lib/tokens.php');
 
 // check if it is a GET request (see specifications for scores)
 if (strcasecmp($_SERVER['REQUEST_METHOD'], 'GET') == 0) {
