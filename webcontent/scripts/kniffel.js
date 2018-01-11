@@ -290,7 +290,7 @@ $(function() {
             } else {
                 $('#btn_wuerfeln').prop('disabled', true);
 		var cookie = Cookies.get();
-		if(cookie.hasOwnProperty('name') && cookie.hasOwnProperty('token')) {
+		if(isLoggedIn()) {
 		    var data = JSON.stringify({token: cookie.get('token'), score: tabelle[16]});
 		    $.ajax({
 			url: 'scores.php',
