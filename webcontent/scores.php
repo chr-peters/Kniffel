@@ -70,7 +70,7 @@ if (strcasecmp($_SERVER['REQUEST_METHOD'], 'GET') == 0) {
 
         // filter the values
         $score = (int)filter_var($requestContent['score'], FILTER_SANITIZE_NUMBER_INT);
-        $token = filter_var($requestContent['name'], FILTER_UNSAFE_RAW);
+        $token = filter_var($requestContent['token'], FILTER_UNSAFE_RAW);
 
         // try to authenticate the user
         $user = authenticate($token);
