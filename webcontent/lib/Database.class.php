@@ -158,7 +158,7 @@ class Database {
 
         $statement->bindParam(':token', $token);
 
-        if($statement->execute() || $statement->rowCount() == 0) {
+        if(!$statement->execute() || $statement->rowCount() == 0) {
             return false;
         }
 
