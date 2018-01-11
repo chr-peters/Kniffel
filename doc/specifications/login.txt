@@ -10,6 +10,8 @@ Anfrage:
 
 Antwort:
 - JSON-Objekt:
-{ token: 'token' }
-- Anm.: Der Token ist eine Zahl zwischen 0 und 10, falls
-der Loginvorgang nicht erfolgreich war.
+{ status: integer, token: 'token' }
+- Anm.: Der Status kann folgende Werte annehmen:
+
+  	0: alles klar
+	1: bist du dumm???

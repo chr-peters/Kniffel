@@ -12,6 +12,7 @@ require('lib/tokens.php');
 // check if it is a POST request (see specifications for scores)
 if (!strcasecmp($_SERVER['REQUEST_METHOD'], 'POST') == 0) {
     // not a POST request, nothing to do
+    sendResponse(1, null);
     exit;
 }
 
@@ -31,12 +32,14 @@ if (isset($requestContent['name']) && isset($requestContent['pw'])) {
     $user = $db->getUserInfo($username);
     if (!$user) {
         // wrong user name
+	sendResponse(1, null);
         exit;
     }
 
     // validate the password
     if (!password_verify($pw, $user['pw'])) {
         // wrong password
+	sendResponse(1, null);
         exit;
     }
 
@@ -46,9 +49,20 @@ if (isset($requestContent['name']) && isset($requestContent['pw'])) {
     // update the token
     if ($db->setToken($user['name'], $token)) {
         // create the JSON response and terminate the script
-        $response = array();
-        $response['token'] = $token;
-        echo json_encode($response);
+        sendResponse(0, $token);
+	exit;
     }
+    sendResponse(1, null);
     exit;
+}
+
+// if this area is reached, logging in did not work
+sendResponse(1, null);
+
+// sends a response to the user
+function sendResponse($status, $token) {
+    $response = array();
+    $response['token'] = $token;
+    $response['status'] = $status;
+    echo json_encode($response);
 }
