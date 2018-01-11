@@ -85,13 +85,13 @@ if (strcasecmp($_SERVER['REQUEST_METHOD'], 'GET') == 0) {
 
         // only update the score if it is greater than the current score
         if ($record!==NULL && $score < $record['score']) {
-            sendResponse(1);
+            sendResponse(0);
             exit;
         }
 
         // update the new score
         if (!$db->setScore($user['name'], $score)) {
-            sendResponse(1);
+            sendResponse(2);
             exit;
         }
 
