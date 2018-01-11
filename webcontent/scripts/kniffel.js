@@ -43,7 +43,7 @@ $(function() {
     }
 
     //set up game
-    $('#btn_start_game').click(function() {
+    function setupGame() {
         wuerfel = [0, 0, 0, 0, 0];
         tabelle = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
         belegt = [false, false, false, false, false, false, false, true, false, false, false, false, false, false, false, true, true];
@@ -51,7 +51,7 @@ $(function() {
             $(this).html("");
         });
         reset();
-    });
+    }
 
     $('#wuerfel0').click(function() {
         $(this).toggleClass('chosen');
@@ -289,7 +289,31 @@ $(function() {
                 reset();
             } else {
                 $('#btn_wuerfeln').prop('disabled', true);
+		var cookie = Cookies.get();
+		if(cookie.hasOwnProperty('name') && cookie.hasOwnProperty('token')) {
+		    var data = JSON.stringify({token: cookie.get('token'), score: tabelle[16]});
+		    $.ajax({
+			url: 'scores.php',
+			type: 'POST',
+			contentType: 'application/json',
+			charSet:'utf-8',
+			dataType: 'json',
+			data: data,
+			success: function(response) {
+			    if(!response.status===0) {
+				var error_msg = "Es konnte keine Verbindung zum Server hergestellt werden.";
+				$('#error_msg').empty().append(error_msg);
+			    }
+			},
+			error: function(xhr, ajaxOptions, thrownError) {
+			    // set the error message
+			    var error_msg = "Die Registrierung ist leider zur Zeit nicht möglich.";
+			    $('#error_msg').empty().append(error_msg);
+			}
+		    });
+		}
             }
         }
     });
+    setupGame();
 });
