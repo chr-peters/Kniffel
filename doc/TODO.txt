@@ -1,0 +1,18 @@
+Wer muss was noch machen?
+========================
+
+Login (Christian)
+
+Profil (Dean)
+ - Anzeigen
+ - Beschreibung erstellen
+ - Andere Benutzer anzeigen
+
+Wiki Eintrag (Daniel)
+
+
+Praesentation (Niklas)
+
+
+Highscoreliste (Niklas)
+ - Mehrere Seiten
