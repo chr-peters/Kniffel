@@ -7,13 +7,17 @@ $(function() {
     $('#btn_zurueck').click(function() {
         offset = offset-10>=0 ? offset-10 : 0;
         getScores(limit, offset);
+        while(offset>0 && $('#score_ranking').html==="") {
+            offset = offset-10>=0 ? offset-10 : 0;
+            getScores(limit, offset);
+        }
     });
 
     $('#btn_vor').click(function() {
         offset += 10;
         getScores(limit, offset);
         while(offset>0 && $('#score_ranking').html==="") {
-            offset -= 10;
+            offset = offset-10>=0 ? offset-10 : 0;
             getScores(limit, offset);
         }
     });
