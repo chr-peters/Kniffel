@@ -36,7 +36,7 @@ $(function() {
             dataType: 'application/json',
             data: request,
             success: function(response) {
-                if(JSON.stringify(response)==='null') {
+                if(JSON.stringify(response.records)==='null') {
                     $('#score_ranking').html("");
                 } else {
                     //place the servers response in the designated div
@@ -53,7 +53,7 @@ $(function() {
 
     // returns a html table from the scores object
     function getTableFromScores(scores) {
-        var table 0 $('<table border="1"></table>');
+        var table = $('<table border="1"></table>');
         var head = $('<tr></tr>');
         head.append('<th>Name</th>');
         head.append('<th>Score</th>');

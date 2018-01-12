@@ -48,7 +48,7 @@ class Database {
         $statement->execute();
 
         // test if any results are found
-        if($statement->rowCount()) {
+        if($statement->rowCount()>0) {
             // get the results
             $results;
             while ($row = $statement->fetch()) {
@@ -62,9 +62,8 @@ class Database {
                 $results[] = $curScore;
             }
             return $results;
-        } else {
-            return NULL;
         }
+        return NULL;
     }
 
     /**
