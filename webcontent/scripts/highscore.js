@@ -1,25 +1,17 @@
 $(function() {
-    var limit = 10;
-    var offset = 0;
+    var global_limit = 10;
+    var global_offset = 0;
 
-    getScores(limit, offset);
+    getScores(global_limit, global_offset);
 
     $('#btn_zurueck').click(function() {
-        offset = offset-10>=0 ? offset-10 : 0;
-        getScores(limit, offset);
-        while(offset>0 && $('#score_ranking').html==="") {
-            offset = offset-10>=0 ? offset-10 : 0;
-            getScores(limit, offset);
-        }
+        global_offset = global_offset-10>=0 ? global_offset-10 : 0;
+        getScores(global_limit, global_offset);
     });
 
     $('#btn_vor').click(function() {
-        offset += 10;
-        getScores(limit, offset);
-        while(offset>0 && $('#score_ranking').html==="") {
-            offset = offset-10>=0 ? offset-10 : 0;
-            getScores(limit, offset);
-        }
+        global_offset += 10;
+        getScores(global_limit, global_offset);
     });
 
     // returns the servers response to a request of limit scores
@@ -33,11 +25,15 @@ $(function() {
             type: 'GET',
             contentType: 'application/json',
             charSet: 'utf-8',
-            dataType: 'application/json',
+            dataType: 'json',
             data: request,
             success: function(response) {
                 if(JSON.stringify(response.records)==='null') {
-                    $('#score_ranking').html("");
+                    if(offset===0) {
+                        $('#score_ranking').html("");
+                    } else {
+                        global_offset -= 10;
+                    }
                 } else {
                     //place the servers response in the designated div
                     $('#score_ranking').html(getTableFromScores(response));
