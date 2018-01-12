@@ -47,20 +47,24 @@ class Database {
         // execute the statement
         $statement->execute();
 
-        // get the results
-        $results;
-        while ($row = $statement->fetch()) {
-            // create a temporary score object
-            $curScore = array();
-            $curScore['name'] = $row['name'];
-            $curScore['score'] = (int)$row['score'];
-            $curScore['time_stamp'] = $row['time_stamp'];
+        // test if any results are found
+        if($statement->rowCount()) {
+            // get the results
+            $results;
+            while ($row = $statement->fetch()) {
+                // create a temporary score object
+                $curScore = array();
+                $curScore['name'] = $row['name'];
+                $curScore['score'] = (int)$row['score'];
+                $curScore['time_stamp'] = $row['time_stamp'];
 
-            // fill it into the results
-            $results[] = $curScore;
+                // fill it into the results
+                $results[] = $curScore;
+            }
+            return $results;
+        } else {
+            return NULL;
         }
-
-        return $results;
     }
 
     /**
