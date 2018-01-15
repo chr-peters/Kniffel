@@ -185,7 +185,7 @@ class Database {
         $statement = $this->pdo->prepare("replace into profiles(name, info) values(:name, :info)");
 
         $statement->bindParam(':name', $username);
-        $statement->bindParam('info', $profile);
+        $statement->bindParam(':info', $profile);
 
         return $statement->execute();
     }
@@ -194,7 +194,7 @@ class Database {
         $statement = $this->pdo->prepare("select info from profiles where name = :name");
 
         $statement->bindParam(':name', $username);
-        $statement->execute();
+        //$statement->execute();
 
         if(!$statement->execute() || $statement->rowCount() == 0) {
             return false;

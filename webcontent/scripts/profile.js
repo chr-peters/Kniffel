@@ -37,10 +37,10 @@ $(function() {
         e.preventDefault();
     });
     $('#btn_request_profile').unbind().click(function(e) {
-        var text = $('#other_profile').val();
+        var text = $('#search_profile').val();
 
         // Create json to send
-        profile = JSON.stringify({profile: text});
+        profile = JSON.stringify({searchFor: text});
 
         // send the json
         $.ajax({
@@ -58,13 +58,13 @@ $(function() {
                     loadContent('contents/profile.html');
                 } else {
                     // set the error message
-                    var error_msg = "Das Speichern war nicht erfolgreich. Bitte versuchen sie es später noch einmal.";
+                    var error_msg = "Das Suchen war nicht erfolgreich. Bitte versuchen sie es später noch einmal.";
                     $('#error_msg').empty().append(error_msg);
                 }
             },
             error: function(xhr, ajaxOptions, thrownError) {
                 // set the error message
-                var error_msg = "Das Speichern ist leider zur Zeit nicht möglich.";
+                var error_msg = "Das Suchen ist leider zur Zeit nicht möglich.";
                 $('#error_msg').empty().append(error_msg);
             }
         });

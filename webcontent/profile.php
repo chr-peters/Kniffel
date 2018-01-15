@@ -1,4 +1,5 @@
 <?php
+
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -21,15 +22,16 @@ $requestContent = fetchContents('POST');
 
 // first create a database connection
 $db = Database::getInstance();
-// test if all necessary parameters are set to login the user
+// test if all necessary parameters are set
 if (isset($requestContent['profile']) && isset($requestContent['token'])) {
     // filter the given inputs
     $profile = filter_var($requestContent['profile'], FILTER_SANITIZE_SPECIAL_CHARS);
     $token = $requestContent['token'];
+    $username = $db->getNameByToken($token);
 
     // retrieve the user object from the database
-    $username = $db->getNameByToken($token);
     $db->setProfile($username, $profile);
+    sendResponse(0);
     exit;
 }
 
@@ -49,6 +51,8 @@ if (isset($requestContent['searchFor'])) {
     exit;
 }
 
+sendResponse(1);
+exit;
 // sends a response to the user
 function sendResponse($status) {
     $response = array();
