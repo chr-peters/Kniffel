@@ -1,1 +1,18 @@
-<h1>Willkommen Benutzer!</h1>
+<script src="scripts/login.js"></script>
+<div id="login">
+    <h1>Loggen Sie sich ein!</h1>
+    <form>
+        <label for="own_profile">Mein Profil</label>
+        <textarea id="own_profile" cols="35" rows="4" placeholder="Mein Profil"></textarea>
+        <input id="btn_save_profile" type="submit" value="Speichern">
+        <br>
+        Suche nach dem Profil von:
+        <br>
+        <input id="search_profile" type="text" placeholder="Nutzername Eingeben">
+        <input id="btn_request_profile" type="submit" value="Suchen">
+        <br>
+        <label for="other_profile"></label>
+        <textarea id="other_profile" cols="35" rows="4" readonly></textarea>
+    </form>
+</div>
+<div id="error_msg"></div>

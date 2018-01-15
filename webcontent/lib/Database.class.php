@@ -13,7 +13,7 @@ class Database {
     private function __construct() {
         // access the variables needed for connection
         global $db_host, $db_user, $db_passwd, $db_name;
-        
+
         // create the connection string
         $dsn = "mysql:host=".$db_host.";dbname=".$db_name;
 
@@ -31,8 +31,8 @@ class Database {
     /**
      * Returns an array of score objects.
      * Each score object is represented by an associative array.
-     * 
-     * Example: 
+     *
+     * Example:
      *          $score['name'] = 'Heinz'
      *          $score['score'] = 250
      *          $score['time_stamp'] = 2017-12-20 07:41:40
@@ -86,7 +86,7 @@ class Database {
             // create the result and return it
             $row = $statement->fetch();
             $res = array();
-            
+
             $res['name'] = $row['name'];
             $res['score'] = (int)$row['score'];
             $res['time_stamp'] = $row['time_stamp'];
@@ -115,7 +115,7 @@ class Database {
 
         return $statement->execute();
     }
-    
+
     /**
      * Inserts a token into the database for a given username.
      */
@@ -168,7 +168,7 @@ class Database {
         $row = $statement->fetch();
         return $row['name'];
     }
-    
+
     /**
      * Sets the score of a user.
      */
@@ -179,6 +179,28 @@ class Database {
         $statement->bindParam(':score', $score);
 
         return $statement->execute();
+    }
+
+    public function setProfile($username, $profile){
+        $statement = $this->pdo->prepare("replace into profiles(name, info) values(:name, :info)");
+
+        $statement->bindParam(':name', $username);
+        $statement->bindParam('info', $profile);
+
+        return $statement->execute();
+    }
+
+    public function getProfile($username){
+        $statement = $this->pdo->prepare("select info from profiles where name = :name");
+
+        $statement->bindParam(':name', $username);
+        $statement->execute();
+
+        if(!$statement->execute() || $statement->rowCount() == 0) {
+            return false;
+        }
+        $row = $statement->fetch();
+        return $row['name'];
     }
 }
 
