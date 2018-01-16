@@ -12,6 +12,7 @@ require('lib/tokens.php');
 // check if it is a POST request (see specifications for scores)
 if (!strcasecmp($_SERVER['REQUEST_METHOD'], 'POST') == 0) {
     // not a POST request, nothing to do
+    echo("Methode war nicht POST: " . $_SERVER['REQUEST_METHOD']);
     sendResponse(1);
     exit;
 }
@@ -22,6 +23,23 @@ $requestContent = fetchContents('POST');
 
 // first create a database connection
 $db = Database::getInstance();
+// test if all necessary parameters are set to load own profile
+if (!isset($requestContent['profile']) && isset($requestContent['token'])) {
+    // filter the given inputs
+    $token = $requestContent['token'];
+    $username = $db->getNameByToken($token);
+
+    // retrieve the user object from the database
+    $user = $db->getProfile($username);
+    if (!$user) {
+        // wrong user name
+        sendResponse(2);
+        exit;
+    }
+    sendResponse(0, $user);
+    exit;
+}
+
 // test if all necessary parameters are set to save a profile
 if (isset($requestContent['profile']) && isset($requestContent['token'])) {
     // filter the given inputs
@@ -34,7 +52,6 @@ if (isset($requestContent['profile']) && isset($requestContent['token'])) {
     sendResponse(0);
     exit;
 }
-
 // test if all necessary parameters are set to search a profile
 if (isset($requestContent['searchFor'])) {
     // filter the given inputs
@@ -42,23 +59,22 @@ if (isset($requestContent['searchFor'])) {
 
     // retrieve the user object from the database
     $user = $db->getProfile($username);
-
     if (!$user) {
-        echo '<script type="text/javascript" language="Javascript">alert("Der User ist nicht vorhanden".)</script>';
         // wrong user name
-        sendResponse(1);
+        sendResponse(2);
         exit;
     }
-    echo '<script type="text/javascript" language="Javascript">alert("Der User ist vorhanden".)</script>';
-    sendResponse(0);
+    sendResponse(0, $user);
     exit;
 }
 
 sendResponse(1);
 exit;
 // sends a response to the user
-function sendResponse($status) {
+function sendResponse($status, $text = '')
+{
     $response = array();
     $response['status'] = $status;
+    $response['text'] = $text;
     echo json_encode($response);
 }

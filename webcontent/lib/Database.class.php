@@ -1,27 +1,30 @@
 <?php
-require(__DIR__.'/../config.php');
+require(__DIR__ . '/../config.php');
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-class Database {
+class Database
+{
     private static $instance;
 
     private $pdo;
 
-    private function __construct() {
+    private function __construct()
+    {
         // access the variables needed for connection
         global $db_host, $db_user, $db_passwd, $db_name;
 
         // create the connection string
-        $dsn = "mysql:host=".$db_host.";dbname=".$db_name;
+        $dsn = "mysql:host=" . $db_host . ";dbname=" . $db_name;
 
         // create the pdo instance
         $this->pdo = new PDO($dsn, $db_user, $db_passwd);
     }
 
-    public static function getInstance() {
+    public static function getInstance()
+    {
         if (!isset(Database::$instance)) {
             Database::$instance = new Database();
         }
@@ -40,15 +43,16 @@ class Database {
      * @param limit The maximum number of rows
      * @param offset The index of the starting row
      */
-    public function getScores($limit, $offset) {
+    public function getScores($limit, $offset)
+    {
         // create the statement
-        $statement = $this->pdo->prepare('select * from highscores order by score desc limit '.$limit.' offset '.$offset);
+        $statement = $this->pdo->prepare('select * from highscores order by score desc limit ' . $limit . ' offset ' . $offset);
 
         // execute the statement
         $statement->execute();
 
         // test if any results are found
-        if($statement->rowCount()>0) {
+        if ($statement->rowCount() > 0) {
             // get the results
             $results;
             while ($row = $statement->fetch()) {
@@ -73,7 +77,8 @@ class Database {
      *
      * @return The record in the already specified format or NULL if the user was not found.
      */
-    public function getScoreRecord($name) {
+    public function getScoreRecord($name)
+    {
         // create the statement
         $statement = $this->pdo->prepare("select * from highscores where name = :name");
 
@@ -105,7 +110,8 @@ class Database {
      * $user['email'] = email
      * $user['pw'] = password
      */
-    public function addUser($user) {
+    public function addUser($user)
+    {
         // create the statement
         $statement = $this->pdo->prepare("insert into users values(:name, :email, :pw)");
 
@@ -119,7 +125,8 @@ class Database {
     /**
      * Inserts a token into the database for a given username.
      */
-    public function setToken($username, $token) {
+    public function setToken($username, $token)
+    {
         $statement = $this->pdo->prepare("insert into tokens values(:name, :token) on duplicate key update token = :token");
 
         $statement->bindParam(':name', $username);
@@ -133,7 +140,8 @@ class Database {
      *
      * @return The object or FALSE if the statement could not be executed.
      */
-    public function getUserInfo($username) {
+    public function getUserInfo($username)
+    {
         $statement = $this->pdo->prepare("select * from users where name = :name");
 
         $statement->bindParam(':name', $username);
@@ -156,12 +164,13 @@ class Database {
      * Returns the username corresponding to a token or false
      * if an error occured.
      */
-    public function getNameByToken($token) {
+    public function getNameByToken($token)
+    {
         $statement = $this->pdo->prepare("select name from tokens where token = :token");
 
         $statement->bindParam(':token', $token);
 
-        if(!$statement->execute() || $statement->rowCount() == 0) {
+        if (!$statement->execute() || $statement->rowCount() == 0) {
             return false;
         }
 
@@ -172,7 +181,8 @@ class Database {
     /**
      * Sets the score of a user.
      */
-    public function setScore($username, $score) {
+    public function setScore($username, $score)
+    {
         $statement = $this->pdo->prepare("insert into highscores(name, score) values(:name, :score) on duplicate key update score = :score, time_stamp = current_timestamp");
 
         $statement->bindParam(':name', $username);
@@ -181,38 +191,28 @@ class Database {
         return $statement->execute();
     }
 
-    public function setProfile($username, $profile){
+    public function setProfile($username, $profile)
+    {
         $statement = $this->pdo->prepare("replace into profiles(name, info) values(:name, :info)");
 
         $statement->bindParam(':name', $username);
         $statement->bindParam(':info', $profile);
         $exec = $statement->execute();
-        if($exec) {
-            echo '<script type="text/javascript" language="Javascript">alert("Save wird ausgeführt")</script>';
-        }
-        else{
-            echo '<script type="text/javascript" language="Javascript">alert("Save wird nicht ausgeführt")</script>';
-        }
         return $exec;
     }
 
-    public function getProfile($username){
+    public function getProfile($username)
+    {
         $statement = $this->pdo->prepare("select info from profiles where name = :name");
 
         $statement->bindParam(':name', $username);
         //$statement->execute();
 
-        if(!$statement->execute() || $statement->rowCount() == 0) {
-            if($statement->rowCount() == 0) {
-                echo '<script type="text/javascript" language="Javascript">alert("Statement Ergebnismenge ist 0")</script>';
-            }
-            if(!$statement->execute()){
-                echo '<script type="text/javascript" language="Javascript">alert("Suche durchführen nicht funktioniert")</script>';
-            }
+        if (!$statement->execute() || $statement->rowCount() == 0) {
             return false;
         }
         $row = $statement->fetch();
-        return $row['name'];
+        return $row['info'];
     }
 }
 
