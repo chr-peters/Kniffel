@@ -53,11 +53,10 @@ $(function () {
             success: function (response) {
                 // test if the response was successful
                 if (response.status === 0) {
-                    console.log(response.text);
+                    refresh();
+                    // and load the profile page
+                    loadContent('contents/profile.html');
                     $('#other_profile').empty().append(response.text)
-                    // refresh();
-                    // // and load the profile page
-                    // loadContent('contents/profile.html');
                 }
                 if (response.status === 2) {
                     // set the error message
