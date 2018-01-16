@@ -16,6 +16,7 @@ $(function() {
             data: user,
             success: function(response) {
                 // test if the response was successful
+                alert("Der Response Status vom Speichern:" + response.status);
                 if (response.status === 0) {
                     refresh();
                     // and load the profile page
@@ -37,10 +38,10 @@ $(function() {
         e.preventDefault();
     });
     $('#btn_request_profile').unbind().click(function(e) {
-        var text = $('#search_profile').val();
+        var name = $('#search_profile').val();
 
         // Create json to send
-        profile = JSON.stringify({searchFor: text});
+        profile = JSON.stringify({searchFor: name});
 
         // send the json
         $.ajax({
@@ -52,6 +53,7 @@ $(function() {
             data: user,
             success: function(response) {
                 // test if the response was successful
+                alert("Der Response Status vom Suchen:" + response.status);
                 if (response.status === 0) {
                     refresh();
                     // and load the profile page

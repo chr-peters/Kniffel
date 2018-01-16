@@ -186,8 +186,14 @@ class Database {
 
         $statement->bindParam(':name', $username);
         $statement->bindParam(':info', $profile);
-
-        return $statement->execute();
+        $exec = $statement->execute();
+        if($exec) {
+            echo '<script type="text/javascript" language="Javascript">alert("Save wird ausgeführt")</script>';
+        }
+        else{
+            echo '<script type="text/javascript" language="Javascript">alert("Save wird nicht ausgeführt")</script>';
+        }
+        return $exec;
     }
 
     public function getProfile($username){
@@ -197,6 +203,12 @@ class Database {
         //$statement->execute();
 
         if(!$statement->execute() || $statement->rowCount() == 0) {
+            if($statement->rowCount() == 0) {
+                echo '<script type="text/javascript" language="Javascript">alert("Statement Ergebnismenge ist 0")</script>';
+            }
+            if(!$statement->execute()){
+                echo '<script type="text/javascript" language="Javascript">alert("Suche durchführen nicht funktioniert")</script>';
+            }
             return false;
         }
         $row = $statement->fetch();

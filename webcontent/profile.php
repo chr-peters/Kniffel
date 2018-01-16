@@ -22,7 +22,7 @@ $requestContent = fetchContents('POST');
 
 // first create a database connection
 $db = Database::getInstance();
-// test if all necessary parameters are set
+// test if all necessary parameters are set to save a profile
 if (isset($requestContent['profile']) && isset($requestContent['token'])) {
     // filter the given inputs
     $profile = filter_var($requestContent['profile'], FILTER_SANITIZE_SPECIAL_CHARS);
@@ -35,6 +35,7 @@ if (isset($requestContent['profile']) && isset($requestContent['token'])) {
     exit;
 }
 
+// test if all necessary parameters are set to search a profile
 if (isset($requestContent['searchFor'])) {
     // filter the given inputs
     $username = filter_var($requestContent['searchFor'], FILTER_SANITIZE_SPECIAL_CHARS);
