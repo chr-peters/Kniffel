@@ -53,14 +53,13 @@ $(function () {
             success: function (response) {
                 // test if the response was successful
                 if (response.status === 0) {
-                    refresh();
-                    // and load the profile page
-                    loadContent('contents/profile.html');
+                    $('#error_msg').empty();
                     $('#other_profile').empty().append(response.text)
                 }
                 if (response.status === 2) {
                     // set the error message
                     var error_msg = "Nutzername nicht gefunden";
+                    $('#other_profile').empty();
                     $('#error_msg').empty().append(error_msg);
                 }
                 if (response.status === 1) {
