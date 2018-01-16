@@ -42,12 +42,14 @@ if (isset($requestContent['searchFor'])) {
 
     // retrieve the user object from the database
     $user = $db->getProfile($username);
+
     if (!$user) {
+        echo '<script type="text/javascript" language="Javascript">alert("Der User ist nicht vorhanden".)</script>';
         // wrong user name
         sendResponse(1);
         exit;
     }
-
+    echo '<script type="text/javascript" language="Javascript">alert("Der User ist vorhanden".)</script>';
     sendResponse(0);
     exit;
 }
