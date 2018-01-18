@@ -33,6 +33,12 @@ if (isset($requestContent['email']) && isset($requestContent['name']) && isset($
     $user['email'] = filter_var($requestContent['email'], FILTER_SANITIZE_EMAIL);
     $user['name'] = filter_var($requestContent['name'], FILTER_SANITIZE_SPECIAL_CHARS);
     $pw = filter_var($requestContent['pw'], FILTER_UNSAFE_RAW);
+
+    // test if every value is set
+    if (empty($user['email']) || empty($user['name']) || empty($pw)) {
+        sendResponse(1, null);
+        exit;
+    }
     
     // hash the password
     $user['pw'] = password_hash($pw, PASSWORD_DEFAULT);

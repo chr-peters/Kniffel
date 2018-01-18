@@ -37,6 +37,7 @@ function refreshNav() {
 
     $('#nav_logout a').unbind().click(function() {
 	removeCookies();
+	loadContent('contents/starting_page.html');
 	refresh();
     });
 }
